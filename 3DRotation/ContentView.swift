@@ -17,6 +17,11 @@ struct ContentView: View {
         
         ZStack {
             // View
+            Image("aw")
+                .resizable()
+                //.scaledToFit()
+                .ignoresSafeArea()
+            
             Button(action: {
                 self.offset = 0
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
@@ -25,15 +30,20 @@ struct ContentView: View {
             }, label: {
                 Text("Open")
                     .font(.system(size: 20, weight: .bold, design: .monospaced))
-                    .foregroundStyle(Color(.label))
+                    .foregroundStyle(.white)
+                    
             })
+            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)
             
             ZStack {
-                Color.red.opacity(0.6)
-                
+                Color.white.opacity(0.6)
+            
                 VStack {
                     HStack {
-                        Spacer()
+                        Text("Angkor Wat is a Hindu-Buddhist temple complex in Cambodia, located on a site measuring 162.6 hectares. It resides within the ancient Khmer capital city of Angkor. The Guinness World Records considers it as the largest religious structure in the world.")
+                            .font(.system(size: 17, weight: .bold, design: .monospaced))
+
+                       //Spacer()
                         
                         Button(action: {
                             self.open.toggle()
@@ -42,22 +52,25 @@ struct ContentView: View {
                             }
                         }, label: {
                             Image(systemName: "xmark.circle.fill")
-                                .font(.title)
-                                .foregroundStyle(.white)
+                                .font(.title2)
+                                .foregroundStyle(.gray)
                         })
-                        .padding()
+                        .offset(y: -100)
                     }
+                    .padding()
+                    
                     Spacer()
+                    
                 }
             }
             .cornerRadius(25)
-            .padding()
+            .padding(35)
             .offset(y: self.offset)
             .rotation3DEffect(.init(degrees: self.open ? 0 : 55),
                               axis: (x: self.open ? 0 : 1.0, y: 0.0, z: 0.0))
             .opacity(self.offset == -UIScreen.main.bounds.height ? 0 : 1.0)
         }
-        .animation(.spring(duration: 0.5))
+        .animation(.easeOut(duration: 0.5))
     }
 }
 
