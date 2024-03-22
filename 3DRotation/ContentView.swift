@@ -16,10 +16,8 @@ struct ContentView: View {
     var body: some View {
         
         ZStack {
-            // View
             Image("aw")
                 .resizable()
-                //.scaledToFit()
                 .ignoresSafeArea()
             
             Button(action: {
@@ -29,22 +27,25 @@ struct ContentView: View {
                 }
             }, label: {
                 Text("Open")
-                    .font(.system(size: 20, weight: .bold, design: .monospaced))
+                    .font(.system(size: 25, weight: .bold, design: .monospaced))
                     .foregroundStyle(.white)
-                    
+                    .shadow(
+                        color: .black,
+                        radius: 1,
+                        x: 5,
+                        y: 10)
             })
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)
             
             ZStack {
-                Color.white.opacity(0.6)
-            
+                LinearGradient(colors: [Color.black, Color.white], startPoint: .topLeading, endPoint: .bottomTrailing).opacity(0.5)
+
                 VStack {
                     HStack {
                         Text("Angkor Wat is a Hindu-Buddhist temple complex in Cambodia, located on a site measuring 162.6 hectares. It resides within the ancient Khmer capital city of Angkor. The Guinness World Records considers it as the largest religious structure in the world.")
-                            .font(.system(size: 17, weight: .bold, design: .monospaced))
-
-                       //Spacer()
-                        
+                            .font(.system(size: 18, weight: .bold, design: .monospaced))
+                            .foregroundStyle(.white)
+                                                
                         Button(action: {
                             self.open.toggle()
                             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
@@ -55,12 +56,11 @@ struct ContentView: View {
                                 .font(.title2)
                                 .foregroundStyle(.gray)
                         })
-                        .offset(y: -100)
+                        .offset(y: -105)
                     }
                     .padding()
                     
                     Spacer()
-                    
                 }
             }
             .cornerRadius(25)
